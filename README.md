@@ -33,7 +33,7 @@ python3 -m http.server 8000
 index.html          页面骨架、站点导航
 styles.css          响应式排版、原创抽象电影卡片、减少动态效果
 js/questions.js     三个情境和选项
-js/films.js         16 部真实电影及本地编辑标签
+js/films.js         35 部真实电影及本地编辑标签
 js/engine.js        纯函数推荐与理由匹配
 js/app.js           页面状态、交互、键盘与剪贴板
 favicon.svg         原创站点图标
@@ -51,9 +51,9 @@ tests/             推荐算法及 Chromium 端到端测试
 
 ### 电影资料与编辑约定
 
-本地数据包含 Whiplash (2014)、The Social Network (2010)、Kill Bill: Vol. 1 (2003)、Manchester by the Sea (2016)、La La Land (2016)、Interstellar (2014)、Arrival (2016)、The Prestige (2006)、The Truman Show (1998)、The Grand Budapest Hotel (2014)、Little Women (2019)、Everything Everywhere All at Once (2022)、Parasite (2019)、Spirited Away (2001)、In the Mood for Love (2000)、Oldboy (2003)。
+本地片库包含 35 部电影，名单与三维标签见 `tests/fixtures/curated-library.json`。接入范围和验证摘要见 [Phase 2C 验收摘要](docs/phase2c/public-summary.md)。
 
-片名和年份指上述具体电影版本（如 2003 年韩国版 Oldboy，2019 年 Little Women）。简介、叙事标签和推荐理由为本项目编辑文本，属于对影片的解读，不代表权威分类。地区标签用于片单多样性，是简化的创作语境分类，不是完整合拍国信息；“欧洲”用于跨欧洲语境的 The Grand Budapest Hotel。片单不提供观看平台或年龄分级承诺，部分电影包含暴力、创伤或沉重主题。
+片名和年份指片库中的具体电影版本（如 2003 年 Kill Bill: Vol. 1，2019 年 Little Women）。简介、叙事标签和推荐理由为本项目编辑文本，属于对影片的解读，不代表权威分类。地区标签用于片单多样性，是简化的创作语境分类，不是完整合拍国信息；“欧洲”用于跨欧洲语境的 The Grand Budapest Hotel。片单不提供观看平台或年龄分级承诺，部分电影包含暴力、创伤或沉重主题。
 
 所有视觉卡片由 CSS 几何图形和文字原创生成，无电影海报、剧照或受许可约束的字体素材。
 
@@ -75,7 +75,7 @@ npm run test:browser
 
 若机器已有 Chromium，可设置 `CHROMIUM_PATH=/usr/bin/chromium`。Linux 缺少浏览器系统依赖时，按 Playwright 官方说明安装。环境中的 npm 缓存目录不可写时，可使用 `npm ci --cache /tmp/cinema-npm-cache`。
 
-- 算法：59 项测试，含全部 27 种组合、结果唯一性、确定性、4/3/3 权重、解释对应关系、无效输入与多样性；另以原提交快照验证全部 27 种组合前三名完全一致、电影和题目文件字节不变、后续候选有限且有依据。
+- 算法：60 项测试，含全部 27 种组合、结果唯一性、确定性、4/3/3 权重、解释对应关系、无效输入与多样性；以精简的定稿测试夹具验证35部版本及现站标签、27组审核计数；题目与算法字节不变，后续候选有限且有依据。原16部快照仅作历史保留，不再要求扩大片库后的前三名等于旧库。
 - 浏览器：真实 DOM 操作遍历 27 种组合；遍历每组答案的所有换片候选与耗尽状态；验证返回、修改、重开、键盘、确认、复制成功与失败、异步复制期间换片、固定 Ember Lab 链接、无外部运行时请求及无脚本错误。
 - 布局：320、375、390、768、1440 像素宽度，开场、每题和结果页无横向溢出；验证减少动态效果。截图输出至忽略的 `test-results/`。
 
