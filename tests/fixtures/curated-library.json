@@ -1,0 +1,494 @@
+{
+  "films": [
+    {
+      "id": "whiplash",
+      "zh": "爆裂鼓手",
+      "year": 2014,
+      "site_code": "CAC",
+      "final_code": "AAA"
+    },
+    {
+      "id": "social-network",
+      "zh": "社交网络",
+      "year": 2010,
+      "site_code": "ACB",
+      "final_code": "CCC"
+    },
+    {
+      "id": "kill-bill",
+      "zh": "杀死比尔",
+      "year": 2003,
+      "site_code": "CAC",
+      "final_code": "AAA"
+    },
+    {
+      "id": "manchester",
+      "zh": "海边的曼彻斯特",
+      "year": 2016,
+      "site_code": "BBB",
+      "final_code": "BBC"
+    },
+    {
+      "id": "la-la-land",
+      "zh": "爱乐之城",
+      "year": 2016,
+      "site_code": "BBB",
+      "final_code": "BBC"
+    },
+    {
+      "id": "interstellar",
+      "zh": "星际穿越",
+      "year": 2014,
+      "site_code": "ACA",
+      "final_code": "CCB"
+    },
+    {
+      "id": "arrival",
+      "zh": "降临",
+      "year": 2016,
+      "site_code": "BCB",
+      "final_code": "BCC"
+    },
+    {
+      "id": "truman",
+      "zh": "楚门的世界",
+      "year": 1998,
+      "site_code": "ACA",
+      "final_code": "CCB"
+    },
+    {
+      "id": "grand-budapest",
+      "zh": "布达佩斯大饭店",
+      "year": 2014,
+      "site_code": "AAB",
+      "final_code": "CAC"
+    },
+    {
+      "id": "little-women",
+      "zh": "小妇人",
+      "year": 2019,
+      "site_code": "BCA",
+      "final_code": "BCB"
+    },
+    {
+      "id": "spirited-away",
+      "zh": "千与千寻",
+      "year": 2001,
+      "site_code": "ABA",
+      "final_code": "CBB"
+    },
+    {
+      "id": "shawshank",
+      "zh": "肖申克的救赎",
+      "year": 1994,
+      "site_code": "ABA",
+      "final_code": "CBB"
+    },
+    {
+      "id": "martian",
+      "zh": "火星救援",
+      "year": 2015,
+      "site_code": "AAA",
+      "final_code": "CAB"
+    },
+    {
+      "id": "twelve-angry-men",
+      "zh": "十二怒汉",
+      "year": 1957,
+      "site_code": "ACA",
+      "final_code": "CCB"
+    },
+    {
+      "id": "witness-prosecution",
+      "zh": "控方证人",
+      "year": 1957,
+      "site_code": "ACC",
+      "final_code": "CCA"
+    },
+    {
+      "id": "inception",
+      "zh": "盗梦空间",
+      "year": 2010,
+      "site_code": "ACB",
+      "final_code": "CCC"
+    },
+    {
+      "id": "coherence",
+      "zh": "彗星来的那一夜",
+      "year": 2013,
+      "site_code": "ACB",
+      "final_code": "CCC"
+    },
+    {
+      "id": "matrix",
+      "zh": "黑客帝国",
+      "year": 1999,
+      "site_code": "AAC",
+      "final_code": "CAA"
+    },
+    {
+      "id": "dark-knight",
+      "zh": "蝙蝠侠：黑暗骑士",
+      "year": 2008,
+      "site_code": "AAC",
+      "final_code": "CAA"
+    },
+    {
+      "id": "inglourious-basterds",
+      "zh": "无耻混蛋",
+      "year": 2009,
+      "site_code": "CCC",
+      "final_code": "ACA"
+    },
+    {
+      "id": "wild-tales",
+      "zh": "荒蛮故事",
+      "year": 2014,
+      "site_code": "CAC",
+      "final_code": "AAA"
+    },
+    {
+      "id": "thelma-louise",
+      "zh": "末路狂花",
+      "year": 1991,
+      "site_code": "CAC",
+      "final_code": "AAA"
+    },
+    {
+      "id": "fight-club",
+      "zh": "搏击俱乐部",
+      "year": 1999,
+      "site_code": "CCB",
+      "final_code": "ACC"
+    },
+    {
+      "id": "three-colors-blue",
+      "zh": "蓝白红三部曲之蓝",
+      "year": 1993,
+      "site_code": "BBB",
+      "final_code": "BBC"
+    },
+    {
+      "id": "lost-translation",
+      "zh": "迷失东京",
+      "year": 2003,
+      "site_code": "BBB",
+      "final_code": "BBC"
+    },
+    {
+      "id": "before-sunset",
+      "zh": "爱在日落黄昏时",
+      "year": 2004,
+      "site_code": "BBB",
+      "final_code": "BBC"
+    },
+    {
+      "id": "we-made-bouquet",
+      "zh": "花束般的恋爱",
+      "year": 2021,
+      "site_code": "BBB",
+      "final_code": "BBC"
+    },
+    {
+      "id": "eat-drink-man-woman",
+      "zh": "饮食男女",
+      "year": 1994,
+      "site_code": "BBB",
+      "final_code": "BBC"
+    },
+    {
+      "id": "like-father-like-son",
+      "zh": "如父如子",
+      "year": 2013,
+      "site_code": "BBA",
+      "final_code": "BBB"
+    },
+    {
+      "id": "last-dance",
+      "zh": "破·地狱",
+      "year": 2024,
+      "site_code": "BBA",
+      "final_code": "BBB"
+    },
+    {
+      "id": "three-idiots",
+      "zh": "三傻大闹宝莱坞",
+      "year": 2009,
+      "site_code": "ACA",
+      "final_code": "CCB"
+    },
+    {
+      "id": "singin-rain",
+      "zh": "雨中曲",
+      "year": 1952,
+      "site_code": "AAA",
+      "final_code": "CAB"
+    },
+    {
+      "id": "modern-times",
+      "zh": "摩登时代",
+      "year": 1936,
+      "site_code": "AAB",
+      "final_code": "CAC"
+    },
+    {
+      "id": "gold-rush",
+      "zh": "淘金记",
+      "year": 1925,
+      "site_code": "AAA",
+      "final_code": "CAB"
+    },
+    {
+      "id": "ivan-childhood",
+      "zh": "伊万的童年",
+      "year": 1962,
+      "site_code": "BBC",
+      "final_code": "BBA"
+    }
+  ],
+  "coverage": [
+    {
+      "final_code": "AAA",
+      "site_code": "CAC",
+      "counts": {
+        "10": 4,
+        "7": 1,
+        "6": 2
+      }
+    },
+    {
+      "final_code": "AAB",
+      "site_code": "CAA",
+      "counts": {
+        "10": 0,
+        "7": 4,
+        "6": 3
+      }
+    },
+    {
+      "final_code": "AAC",
+      "site_code": "CAB",
+      "counts": {
+        "10": 0,
+        "7": 5,
+        "6": 2
+      }
+    },
+    {
+      "final_code": "ABA",
+      "site_code": "CBC",
+      "counts": {
+        "10": 0,
+        "7": 5,
+        "6": 1
+      }
+    },
+    {
+      "final_code": "ABB",
+      "site_code": "CBA",
+      "counts": {
+        "10": 0,
+        "7": 0,
+        "6": 4
+      }
+    },
+    {
+      "final_code": "ABC",
+      "site_code": "CBB",
+      "counts": {
+        "10": 0,
+        "7": 1,
+        "6": 7
+      }
+    },
+    {
+      "final_code": "ACA",
+      "site_code": "CCC",
+      "counts": {
+        "10": 1,
+        "7": 5,
+        "6": 1
+      }
+    },
+    {
+      "final_code": "ACB",
+      "site_code": "CCA",
+      "counts": {
+        "10": 0,
+        "7": 2,
+        "6": 5
+      }
+    },
+    {
+      "final_code": "ACC",
+      "site_code": "CCB",
+      "counts": {
+        "10": 1,
+        "7": 1,
+        "6": 4
+      }
+    },
+    {
+      "final_code": "BAA",
+      "site_code": "BAC",
+      "counts": {
+        "10": 0,
+        "7": 1,
+        "6": 6
+      }
+    },
+    {
+      "final_code": "BAB",
+      "site_code": "BAA",
+      "counts": {
+        "10": 0,
+        "7": 3,
+        "6": 3
+      }
+    },
+    {
+      "final_code": "BAC",
+      "site_code": "BAB",
+      "counts": {
+        "10": 0,
+        "7": 8,
+        "6": 2
+      }
+    },
+    {
+      "final_code": "BBA",
+      "site_code": "BBC",
+      "counts": {
+        "10": 1,
+        "7": 9,
+        "6": 0
+      }
+    },
+    {
+      "final_code": "BBB",
+      "site_code": "BBA",
+      "counts": {
+        "10": 2,
+        "7": 9,
+        "6": 2
+      }
+    },
+    {
+      "final_code": "BBC",
+      "site_code": "BBB",
+      "counts": {
+        "10": 7,
+        "7": 4,
+        "6": 0
+      }
+    },
+    {
+      "final_code": "BCA",
+      "site_code": "BCC",
+      "counts": {
+        "10": 0,
+        "7": 3,
+        "6": 2
+      }
+    },
+    {
+      "final_code": "BCB",
+      "site_code": "BCA",
+      "counts": {
+        "10": 1,
+        "7": 3,
+        "6": 4
+      }
+    },
+    {
+      "final_code": "BCC",
+      "site_code": "BCB",
+      "counts": {
+        "10": 1,
+        "7": 8,
+        "6": 4
+      }
+    },
+    {
+      "final_code": "CAA",
+      "site_code": "AAC",
+      "counts": {
+        "10": 2,
+        "7": 6,
+        "6": 4
+      }
+    },
+    {
+      "final_code": "CAB",
+      "site_code": "AAA",
+      "counts": {
+        "10": 3,
+        "7": 10,
+        "6": 0
+      }
+    },
+    {
+      "final_code": "CAC",
+      "site_code": "AAB",
+      "counts": {
+        "10": 2,
+        "7": 8,
+        "6": 0
+      }
+    },
+    {
+      "final_code": "CBA",
+      "site_code": "ABC",
+      "counts": {
+        "10": 0,
+        "7": 5,
+        "6": 1
+      }
+    },
+    {
+      "final_code": "CBB",
+      "site_code": "ABA",
+      "counts": {
+        "10": 2,
+        "7": 7,
+        "6": 2
+      }
+    },
+    {
+      "final_code": "CBC",
+      "site_code": "ABB",
+      "counts": {
+        "10": 0,
+        "7": 7,
+        "6": 7
+      }
+    },
+    {
+      "final_code": "CCA",
+      "site_code": "ACC",
+      "counts": {
+        "10": 1,
+        "7": 9,
+        "6": 1
+      }
+    },
+    {
+      "final_code": "CCB",
+      "site_code": "ACA",
+      "counts": {
+        "10": 4,
+        "7": 9,
+        "6": 1
+      }
+    },
+    {
+      "final_code": "CCC",
+      "site_code": "ACB",
+      "counts": {
+        "10": 3,
+        "7": 7,
+        "6": 2
+      }
+    }
+  ]
+}

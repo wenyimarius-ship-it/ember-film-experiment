@@ -1,0 +1,1417 @@
+{
+  "sourceCommit": "59e017d52e3b0f3a3baa7c5055a30e6013960e78",
+  "filmsSha256": "20b030a3d0dc25ad2d28ba9d6fde5c58f4688e6f9a9371f049c6e587e1825d04",
+  "questionsSha256": "785b2f30e1ca1640e97ee6d607b5f486f68cfd1298add681d0058f86777ef9aa",
+  "combinations": {
+    "100": [
+      {
+        "id": "everything",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "主角逐渐接纳遗憾与不完美，重新理解家人。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "多宇宙切换和高密度动作让故事高速前行。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "人物在混乱中改变了回应亲情与生活的方式。"
+          }
+        ]
+      },
+      {
+        "id": "arrival",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "故事邀请人物直面生命中的失去与选择。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "对语言与时间的认识改变了主角看待生命的方式。"
+          }
+        ]
+      },
+      {
+        "id": "little-women",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "姐妹们经历失去与分离，逐渐学会与变化共处。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "人物在现实限制中逐步形成自己的生活选择。"
+          }
+        ]
+      }
+    ],
+    "101": [
+      {
+        "id": "everything",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "主角逐渐接纳遗憾与不完美，重新理解家人。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "多宇宙切换和高密度动作让故事高速前行。"
+          }
+        ]
+      },
+      {
+        "id": "in-the-mood",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "人物面对无法挽回的关系，在记忆与克制中承受失去。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "未被说尽的感情留在时间里，没有整齐的答案。"
+          }
+        ]
+      },
+      {
+        "id": "la-la-land",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "人物必须面对错过，重新理解共同的过去。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "梦想与爱情的得失并存，结尾保留温柔的遗憾。"
+          }
+        ]
+      }
+    ],
+    "102": [
+      {
+        "id": "everything",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "主角逐渐接纳遗憾与不完美，重新理解家人。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "多宇宙切换和高密度动作让故事高速前行。"
+          }
+        ]
+      },
+      {
+        "id": "kill-bill",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "密集的动作冲突与章节式推进带来强烈节奏。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "关键对决有明确胜负，但复仇旅程尚未结束。"
+          }
+        ]
+      },
+      {
+        "id": "whiplash",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "排练与演出的正面冲突，让节奏持续紧绷。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "最后的舞台对决将野心与代价推到台前。"
+          }
+        ]
+      }
+    ],
+    "110": [
+      {
+        "id": "little-women",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "姐妹们经历失去与分离，逐渐学会与变化共处。"
+          },
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "家庭日常与姐妹关系构成故事的情感核心。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "人物在现实限制中逐步形成自己的生活选择。"
+          }
+        ]
+      },
+      {
+        "id": "in-the-mood",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "人物面对无法挽回的关系，在记忆与克制中承受失去。"
+          },
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "重复的日常、停顿与距离让情感缓缓积累。"
+          }
+        ]
+      },
+      {
+        "id": "everything",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "主角逐渐接纳遗憾与不完美，重新理解家人。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "人物在混乱中改变了回应亲情与生活的方式。"
+          }
+        ]
+      }
+    ],
+    "111": [
+      {
+        "id": "in-the-mood",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "人物面对无法挽回的关系，在记忆与克制中承受失去。"
+          },
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "重复的日常、停顿与距离让情感缓缓积累。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "未被说尽的感情留在时间里，没有整齐的答案。"
+          }
+        ]
+      },
+      {
+        "id": "la-la-land",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "人物必须面对错过，重新理解共同的过去。"
+          },
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "歌曲与相处片段逐渐展开两人的亲密关系。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "梦想与爱情的得失并存，结尾保留温柔的遗憾。"
+          }
+        ]
+      },
+      {
+        "id": "manchester",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "主角面对无法抹去的悲痛，学习承认自己的限度。"
+          },
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "日常相处与零散往事让情绪缓缓浮现。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "伤痛没有被轻易治愈，关系仍寻找可行的距离。"
+          }
+        ]
+      }
+    ],
+    "112": [
+      {
+        "id": "in-the-mood",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "人物面对无法挽回的关系，在记忆与克制中承受失去。"
+          },
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "重复的日常、停顿与距离让情感缓缓积累。"
+          }
+        ]
+      },
+      {
+        "id": "la-la-land",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "人物必须面对错过，重新理解共同的过去。"
+          },
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "歌曲与相处片段逐渐展开两人的亲密关系。"
+          }
+        ]
+      },
+      {
+        "id": "little-women",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "姐妹们经历失去与分离，逐渐学会与变化共处。"
+          },
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "家庭日常与姐妹关系构成故事的情感核心。"
+          }
+        ]
+      }
+    ],
+    "120": [
+      {
+        "id": "arrival",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "故事邀请人物直面生命中的失去与选择。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "语言线索和非线性叙事逐渐重塑观众的理解。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "对语言与时间的认识改变了主角看待生命的方式。"
+          }
+        ]
+      },
+      {
+        "id": "everything",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "主角逐渐接纳遗憾与不完美，重新理解家人。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "人物在混乱中改变了回应亲情与生活的方式。"
+          }
+        ]
+      },
+      {
+        "id": "little-women",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "姐妹们经历失去与分离，逐渐学会与变化共处。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "人物在现实限制中逐步形成自己的生活选择。"
+          }
+        ]
+      }
+    ],
+    "121": [
+      {
+        "id": "arrival",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "故事邀请人物直面生命中的失去与选择。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "语言线索和非线性叙事逐渐重塑观众的理解。"
+          }
+        ]
+      },
+      {
+        "id": "in-the-mood",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "人物面对无法挽回的关系，在记忆与克制中承受失去。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "未被说尽的感情留在时间里，没有整齐的答案。"
+          }
+        ]
+      },
+      {
+        "id": "la-la-land",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "人物必须面对错过，重新理解共同的过去。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "梦想与爱情的得失并存，结尾保留温柔的遗憾。"
+          }
+        ]
+      }
+    ],
+    "122": [
+      {
+        "id": "arrival",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "与过去和解",
+            "reason": "故事邀请人物直面生命中的失去与选择。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "语言线索和非线性叙事逐渐重塑观众的理解。"
+          }
+        ]
+      },
+      {
+        "id": "oldboy",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "身份谜团与层层揭示驱动整个追查过程。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "真相使复仇的胜负变得残酷而复杂。"
+          }
+        ]
+      },
+      {
+        "id": "prestige",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "多层叙事、日记与误导让真相逐步显形。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "对决的揭晓将胜负和牺牲紧紧联系在一起。"
+          }
+        ]
+      }
+    ],
+    "200": [
+      {
+        "id": "kill-bill",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "女主角直接选择复仇，以危险行动回应背叛。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "密集的动作冲突与章节式推进带来强烈节奏。"
+          }
+        ]
+      },
+      {
+        "id": "whiplash",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "鼓手以更激烈的演奏回应羞辱，反击伴随身心代价。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "排练与演出的正面冲突，让节奏持续紧绷。"
+          }
+        ]
+      },
+      {
+        "id": "everything",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "多宇宙切换和高密度动作让故事高速前行。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "人物在混乱中改变了回应亲情与生活的方式。"
+          }
+        ]
+      }
+    ],
+    "201": [
+      {
+        "id": "kill-bill",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "女主角直接选择复仇，以危险行动回应背叛。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "密集的动作冲突与章节式推进带来强烈节奏。"
+          }
+        ]
+      },
+      {
+        "id": "whiplash",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "鼓手以更激烈的演奏回应羞辱，反击伴随身心代价。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "排练与演出的正面冲突，让节奏持续紧绷。"
+          }
+        ]
+      },
+      {
+        "id": "grand-budapest",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "追逐、误会与事件接连发生，推进轻快而密集。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "喜剧冒险背后，历史与失落让回忆带着苦涩。"
+          }
+        ]
+      }
+    ],
+    "202": [
+      {
+        "id": "kill-bill",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "女主角直接选择复仇，以危险行动回应背叛。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "密集的动作冲突与章节式推进带来强烈节奏。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "关键对决有明确胜负，但复仇旅程尚未结束。"
+          }
+        ]
+      },
+      {
+        "id": "whiplash",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "鼓手以更激烈的演奏回应羞辱，反击伴随身心代价。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "排练与演出的正面冲突，让节奏持续紧绷。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "最后的舞台对决将野心与代价推到台前。"
+          }
+        ]
+      },
+      {
+        "id": "oldboy",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "主角执意追索与报复，却被卷入更残酷的代价。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "真相使复仇的胜负变得残酷而复杂。"
+          }
+        ]
+      }
+    ],
+    "210": [
+      {
+        "id": "little-women",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "家庭日常与姐妹关系构成故事的情感核心。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "人物在现实限制中逐步形成自己的生活选择。"
+          }
+        ]
+      },
+      {
+        "id": "spirited-away",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "与伙伴建立信任的过程让勇气与情感逐渐生长。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "少女在旅程中成长，学会承担与告别。"
+          }
+        ]
+      },
+      {
+        "id": "oldboy",
+        "score": 4,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "主角执意追索与报复，却被卷入更残酷的代价。"
+          }
+        ]
+      }
+    ],
+    "211": [
+      {
+        "id": "in-the-mood",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "重复的日常、停顿与距离让情感缓缓积累。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "未被说尽的感情留在时间里，没有整齐的答案。"
+          }
+        ]
+      },
+      {
+        "id": "la-la-land",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "歌曲与相处片段逐渐展开两人的亲密关系。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "梦想与爱情的得失并存，结尾保留温柔的遗憾。"
+          }
+        ]
+      },
+      {
+        "id": "manchester",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "日常相处与零散往事让情绪缓缓浮现。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "伤痛没有被轻易治愈，关系仍寻找可行的距离。"
+          }
+        ]
+      }
+    ],
+    "212": [
+      {
+        "id": "kill-bill",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "女主角直接选择复仇，以危险行动回应背叛。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "关键对决有明确胜负，但复仇旅程尚未结束。"
+          }
+        ]
+      },
+      {
+        "id": "parasite",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "人物的愤怒在阶层冲突中升级，行动伴随惨重代价。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "冲突的爆发让阶层愿望与现实代价正面相撞。"
+          }
+        ]
+      },
+      {
+        "id": "prestige",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "魔术师以报复回应对手，将竞争推向危险处境。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "对决的揭晓将胜负和牺牲紧紧联系在一起。"
+          }
+        ]
+      }
+    ],
+    "220": [
+      {
+        "id": "oldboy",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "主角执意追索与报复，却被卷入更残酷的代价。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "身份谜团与层层揭示驱动整个追查过程。"
+          }
+        ]
+      },
+      {
+        "id": "prestige",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "魔术师以报复回应对手，将竞争推向危险处境。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "多层叙事、日记与误导让真相逐步显形。"
+          }
+        ]
+      },
+      {
+        "id": "parasite",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "人物的愤怒在阶层冲突中升级，行动伴随惨重代价。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "隐瞒、空间秘密与局势逆转不断重排信息。"
+          }
+        ]
+      }
+    ],
+    "221": [
+      {
+        "id": "oldboy",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "主角执意追索与报复，却被卷入更残酷的代价。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "身份谜团与层层揭示驱动整个追查过程。"
+          }
+        ]
+      },
+      {
+        "id": "prestige",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "魔术师以报复回应对手，将竞争推向危险处境。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "多层叙事、日记与误导让真相逐步显形。"
+          }
+        ]
+      },
+      {
+        "id": "parasite",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "人物的愤怒在阶层冲突中升级，行动伴随惨重代价。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "隐瞒、空间秘密与局势逆转不断重排信息。"
+          }
+        ]
+      }
+    ],
+    "222": [
+      {
+        "id": "oldboy",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "主角执意追索与报复，却被卷入更残酷的代价。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "身份谜团与层层揭示驱动整个追查过程。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "真相使复仇的胜负变得残酷而复杂。"
+          }
+        ]
+      },
+      {
+        "id": "prestige",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "魔术师以报复回应对手，将竞争推向危险处境。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "多层叙事、日记与误导让真相逐步显形。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "对决的揭晓将胜负和牺牲紧紧联系在一起。"
+          }
+        ]
+      },
+      {
+        "id": "parasite",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "反击与代价",
+            "reason": "人物的愤怒在阶层冲突中升级，行动伴随惨重代价。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "隐瞒、空间秘密与局势逆转不断重排信息。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "冲突的爆发让阶层愿望与现实代价正面相撞。"
+          }
+        ]
+      }
+    ],
+    "000": [
+      {
+        "id": "grand-budapest",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "礼宾员在混乱中努力维护自己的秩序与职业尊严。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "追逐、误会与事件接连发生，推进轻快而密集。"
+          }
+        ]
+      },
+      {
+        "id": "spirited-away",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "千寻在陌生环境中学习规则，以行动争取回家的机会。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "少女在旅程中成长，学会承担与告别。"
+          }
+        ]
+      },
+      {
+        "id": "truman",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "楚门主动追寻真相，试图夺回自己生活的决定权。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "人物从习惯被安排的生活走向自主选择。"
+          }
+        ]
+      }
+    ],
+    "001": [
+      {
+        "id": "grand-budapest",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "礼宾员在混乱中努力维护自己的秩序与职业尊严。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "追逐、误会与事件接连发生，推进轻快而密集。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "喜剧冒险背后，历史与失落让回忆带着苦涩。"
+          }
+        ]
+      },
+      {
+        "id": "social-network",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "创办者借建立平台寻求主动权，却难以掌控关系。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "商业成功与人际失落并存，留下复杂余味。"
+          }
+        ]
+      },
+      {
+        "id": "spirited-away",
+        "score": 4,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "千寻在陌生环境中学习规则，以行动争取回家的机会。"
+          }
+        ]
+      }
+    ],
+    "002": [
+      {
+        "id": "grand-budapest",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "礼宾员在混乱中努力维护自己的秩序与职业尊严。"
+          },
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "追逐、误会与事件接连发生，推进轻快而密集。"
+          }
+        ]
+      },
+      {
+        "id": "kill-bill",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "密集的动作冲突与章节式推进带来强烈节奏。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "关键对决有明确胜负，但复仇旅程尚未结束。"
+          }
+        ]
+      },
+      {
+        "id": "whiplash",
+        "score": 6,
+        "reasons": [
+          {
+            "dimension": 1,
+            "choice": "强烈节奏",
+            "reason": "排练与演出的正面冲突，让节奏持续紧绷。"
+          },
+          {
+            "dimension": 2,
+            "choice": "决定性代价",
+            "reason": "最后的舞台对决将野心与代价推到台前。"
+          }
+        ]
+      }
+    ],
+    "010": [
+      {
+        "id": "spirited-away",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "千寻在陌生环境中学习规则，以行动争取回家的机会。"
+          },
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "与伙伴建立信任的过程让勇气与情感逐渐生长。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "少女在旅程中成长，学会承担与告别。"
+          }
+        ]
+      },
+      {
+        "id": "interstellar",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "探险者通过行动为濒临绝境的人类寻找出路。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "旅程改变了人物对时间、责任与亲情的理解。"
+          }
+        ]
+      },
+      {
+        "id": "truman",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "楚门主动追寻真相，试图夺回自己生活的决定权。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "人物从习惯被安排的生活走向自主选择。"
+          }
+        ]
+      }
+    ],
+    "011": [
+      {
+        "id": "grand-budapest",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "礼宾员在混乱中努力维护自己的秩序与职业尊严。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "喜剧冒险背后，历史与失落让回忆带着苦涩。"
+          }
+        ]
+      },
+      {
+        "id": "spirited-away",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "千寻在陌生环境中学习规则，以行动争取回家的机会。"
+          },
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "与伙伴建立信任的过程让勇气与情感逐渐生长。"
+          }
+        ]
+      },
+      {
+        "id": "social-network",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "创办者借建立平台寻求主动权，却难以掌控关系。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "商业成功与人际失落并存，留下复杂余味。"
+          }
+        ]
+      }
+    ],
+    "012": [
+      {
+        "id": "spirited-away",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "千寻在陌生环境中学习规则，以行动争取回家的机会。"
+          },
+          {
+            "dimension": 1,
+            "choice": "情绪与关系",
+            "reason": "与伙伴建立信任的过程让勇气与情感逐渐生长。"
+          }
+        ]
+      },
+      {
+        "id": "grand-budapest",
+        "score": 4,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "礼宾员在混乱中努力维护自己的秩序与职业尊严。"
+          }
+        ]
+      },
+      {
+        "id": "truman",
+        "score": 4,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "楚门主动追寻真相，试图夺回自己生活的决定权。"
+          }
+        ]
+      }
+    ],
+    "020": [
+      {
+        "id": "interstellar",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "探险者通过行动为濒临绝境的人类寻找出路。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "时间差、宇宙谜题与跨时空线索共同推进故事。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "旅程改变了人物对时间、责任与亲情的理解。"
+          }
+        ]
+      },
+      {
+        "id": "truman",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "楚门主动追寻真相，试图夺回自己生活的决定权。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "日常中的异常逐步累积成关于世界的悬念。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "人物从习惯被安排的生活走向自主选择。"
+          }
+        ]
+      },
+      {
+        "id": "spirited-away",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "千寻在陌生环境中学习规则，以行动争取回家的机会。"
+          },
+          {
+            "dimension": 2,
+            "choice": "人物改变",
+            "reason": "少女在旅程中成长，学会承担与告别。"
+          }
+        ]
+      }
+    ],
+    "021": [
+      {
+        "id": "social-network",
+        "score": 10,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "创办者借建立平台寻求主动权，却难以掌控关系。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "诉讼证词与创业往事交错，让信息逐步拼合。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "商业成功与人际失落并存，留下复杂余味。"
+          }
+        ]
+      },
+      {
+        "id": "grand-budapest",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "礼宾员在混乱中努力维护自己的秩序与职业尊严。"
+          },
+          {
+            "dimension": 2,
+            "choice": "真实与复杂",
+            "reason": "喜剧冒险背后，历史与失落让回忆带着苦涩。"
+          }
+        ]
+      },
+      {
+        "id": "truman",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "楚门主动追寻真相，试图夺回自己生活的决定权。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "日常中的异常逐步累积成关于世界的悬念。"
+          }
+        ]
+      }
+    ],
+    "022": [
+      {
+        "id": "interstellar",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "探险者通过行动为濒临绝境的人类寻找出路。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "时间差、宇宙谜题与跨时空线索共同推进故事。"
+          }
+        ]
+      },
+      {
+        "id": "truman",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "楚门主动追寻真相，试图夺回自己生活的决定权。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "日常中的异常逐步累积成关于世界的悬念。"
+          }
+        ]
+      },
+      {
+        "id": "social-network",
+        "score": 7,
+        "reasons": [
+          {
+            "dimension": 0,
+            "choice": "重建秩序",
+            "reason": "创办者借建立平台寻求主动权，却难以掌控关系。"
+          },
+          {
+            "dimension": 1,
+            "choice": "结构与悬念",
+            "reason": "诉讼证词与创业往事交错，让信息逐步拼合。"
+          }
+        ]
+      }
+    ]
+  }
+}
