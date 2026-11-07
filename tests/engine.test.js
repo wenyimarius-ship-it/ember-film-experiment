@@ -61,3 +61,32 @@ test('diversity resolves ties and catalog spans regions, styles and decades', ()
   assert.ok(new Set(films.map(f=>Math.floor(f.year/10))).size>=4);
   assert.ok(new Set(recommend([1,1,1]).map(r=>r.film.region)).size>=2);
 });
+
+// Frozen before this change, from the original deployed MVP commit.
+const baseline = JSON.parse(await (await import('node:fs/promises')).readFile(new URL('./fixtures/original-mvp.json', import.meta.url), 'utf8'));
+const {createHash} = await import('node:crypto');
+const {readFile} = await import('node:fs/promises');
+const {candidates, headlineReason} = await import('../js/engine.js');
+test('original movie and question files are byte-for-byte preserved', async () => {
+  for (const [file,key] of [['films','filmsSha256'],['questions','questionsSha256']]) {
+    assert.equal(createHash('sha256').update(await readFile(new URL(`../js/${file}.js`,import.meta.url))).digest('hex'),baseline[key]);
+  }
+});
+for(const [key,expected] of Object.entries(baseline.combinations)) {
+  test(`${key}: original top three preserved; finite swap candidates all have grounded reasons`,()=>{
+    const answers=Array.from(key,Number);
+    const simplify=r=>({id:r.film.id,score:r.score,reasons:r.reasons});
+    assert.deepEqual(recommend(answers).map(simplify),expected);
+    const pool=candidates(answers);
+    assert.deepEqual(pool.slice(0,3).map(simplify),expected);
+    assert.equal(new Set(pool.map(r=>r.film.id)).size,pool.length);
+    assert.equal(pool.length,films.filter(f=>baseScore(f,answers)>0).length);
+    assert.ok(pool.length<=16);
+    for(const candidate of pool) {
+      assert.ok(candidate.score>0);
+      const first=candidate.reasons[0];
+      assert.ok(headlineReason(candidate).includes(questions[first.dimension].choices[answers[first.dimension]].short));
+      assert.ok(headlineReason(candidate).includes(first.reason));
+    }
+  });
+}

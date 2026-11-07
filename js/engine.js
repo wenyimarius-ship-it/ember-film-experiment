@@ -13,11 +13,11 @@ export function explain(film, answers) {
   return film.facets.flatMap((facet, i) => facet.value === answers[i] ? [{dimension:i, choice:questions[i].choices[answers[i]].short, reason:facet.reason}] : []);
 }
 // Greedy, deterministic diversity adjustment. Maximum penalty 0.9 < one dimension's weight.
-export function recommend(answers) {
+function rank(answers, limit) {
   validateAnswers(answers);
   const chosen = [];
   const remaining = films.map(film => ({film, score:baseScore(film, answers)}));
-  while (chosen.length < 3) {
+  while (chosen.length < limit) {
     const adjusted = candidate => candidate.score - (chosen.length ? ['style','region','decade'].reduce((penalty,key) => {
       const value = f => key === 'decade' ? Math.floor(f.year / 10) : f[key];
       return penalty + (chosen.some(c => value(c.film) === value(candidate.film)) ? 0.3 : 0);
@@ -27,4 +27,18 @@ export function recommend(answers) {
     chosen.push({...selected, reasons:explain(selected.film, answers)});
   }
   return chosen;
+}
+
+// Preserve the original three-film API and its exact ordering.
+export function recommend(answers) {
+  return rank(answers, 3);
+}
+// The first result is unchanged; swaps consume the remaining positive matches once.
+export function candidates(answers) {
+  return rank(answers, films.length).filter(candidate => candidate.score > 0);
+}
+export function headlineReason(candidate) {
+  const match = candidate.reasons[0];
+  if (!match) throw new TypeError('影片没有有效的匹配依据。');
+  return `你选了「${match.choice}」：${match.reason}`;
 }
