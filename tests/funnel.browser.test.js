@@ -8,11 +8,12 @@ import {fileURLToPath} from 'node:url';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const counts=new Map();const received=[];
 let base;
+let productionOrigin='https://ember-film-experiment.vercel.app';
 const server=createServer(async(req,res)=>{
  try {
   const url=new URL(req.url,base);
   let content;
-  if(url.pathname==='/js/analytics-config.js')content=`export const analyticsConfig={site:'cinema',apiHost:'https://us.i.posthog.com',projectToken:'phc_localTestOnly',liveEnabled:false};`;
+  if(url.pathname==='/js/analytics-config.js')content=`export const analyticsConfig={site:'cinema',apiHost:'https://us.i.posthog.com',projectToken:'phc_localTestOnly',liveEnabled:true,productionOrigin:'${productionOrigin}'};`;
   else content=await readFile(path.join(root,url.pathname==='/'?'index.html':url.pathname));
   res.writeHead(200,{'Content-Type':url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':'text/html','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src https://us.i.posthog.com"});res.end(content);
  }catch{res.writeHead(404);res.end();}
@@ -53,4 +54,21 @@ try {
  assert.deepEqual(errors,[]);
  console.log('PASS: actual Cinema flow + intercepted PostHog capture (not cloud ingestion): open/start/complete each1; swaps/edit/reload no duplicates; source and test mode persist; no answer transmitted');
  await context.close();
+ // Production-mode verification uses a fresh context and mock responses, never cloud events.
+ productionOrigin=base;
+ for(const query of ['?utm_source=wechat_moments','']) {
+  const fresh=await browser.newContext({reducedMotion:'reduce'});const tab=await fresh.newPage();const prod=[];
+  await tab.route('https://us.i.posthog.com/capture/',async route=>{
+   if(route.request().method()!=='OPTIONS')prod.push(route.request().postDataJSON());
+   await route.fulfill({status:200,headers:{'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'content-type'},json:{status:1}});
+  });
+  await tab.goto(base+query);await tab.getByRole('button',{name:'开始选',exact:true}).click();
+  for(let i=0;i<3;i++){await tab.locator('[data-choice="0"]').click();await tab.waitForFunction(n=>document.querySelector('[role=progressbar]')?.getAttribute('aria-valuenow')!==String(n),i+1);}
+  await tab.waitForTimeout(200);
+  assert.equal(prod.length,query?3:0);
+  for(const event of prod){assert.equal(event.properties.source,'wechat_moments');assert.equal(event.properties.traffic,'live');}
+  await fresh.close();
+ }
+ console.log('PASS: non-production host cannot send live; production WeChat emits3 live events; direct production visit emits0');
+
 }finally{await browser?.close();await new Promise(resolve=>server.close(resolve));}

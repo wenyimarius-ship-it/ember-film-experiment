@@ -5,15 +5,16 @@ const params = new URLSearchParams(window.location.search);
 let storage;
 try { storage = window.sessionStorage; } catch { /* Storage disabled: in-memory fallback. */ }
 const traffic = params.get('analytics_test') === '1' ? 'test' : 'live';
+const liveAllowed = analyticsConfig.liveEnabled && window.location.origin === analyticsConfig.productionOrigin;
 // Freeze mode for this tab session, so a reload without test parameters cannot become live.
 let sessionTraffic = traffic;
 try {
   const saved = storage?.getItem('cinema.funnel.traffic.v1');
-  if (saved === 'test' || (saved === 'live' && analyticsConfig.liveEnabled)) sessionTraffic = saved;
+  if (saved === 'test' || (saved === 'live' && liveAllowed)) sessionTraffic = saved;
   // Merely opening a disabled, untagged Preview must not block a later test link.
-  else if (traffic === 'test' || analyticsConfig.liveEnabled) storage?.setItem('cinema.funnel.traffic.v1',traffic);
+  else if (traffic === 'test' || liveAllowed) storage?.setItem('cinema.funnel.traffic.v1',traffic);
 } catch { /* Keep in-memory mode. */ }
-const enabled = analyticsConfig.projectToken && (sessionTraffic === 'test' || analyticsConfig.liveEnabled);
+const enabled = analyticsConfig.projectToken && (sessionTraffic === 'test' || liveAllowed);
 const record = enabled ? createFunnel({storage,search:window.location.search,emit:createPostHogSender({
   ...analyticsConfig, traffic:sessionTraffic
 })}) : () => false;

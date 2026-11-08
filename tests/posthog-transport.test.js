@@ -19,3 +19,9 @@ test('Puzzle uses same project with separate site; capture failure is observable
 test('refuses foreign hosts, missing keys and non-enumerated sites/traffic',()=>{
  for(const patch of [{apiHost:'https://other.example'},{projectToken:''},{site:'private-site'},{traffic:'personal'}])assert.throws(()=>createPostHogSender({...config,...patch}),TypeError);
 });
+
+test('only WeChat source is sent, including when live capture is enabled',async()=>{
+ let count=0;const emit=createPostHogSender({...config,traffic:'live',send:async()=>{count++;return {ok:true};}});
+ for(const source of ['direct','other','email@example.com'])await emit('cinema_open',{source});
+ assert.equal(count,0);await emit('cinema_open',{source:'wechat_moments'});assert.equal(count,1);
+});

@@ -1,8 +1,8 @@
-# Cinema / Puzzle：共用PostHog项目，Preview测试阶段
+# Cinema / Puzzle：共用PostHog项目，正式发布候选（待预览去重验收）
 
 ## 当前状态
 
-接入现有项目 `https://us.i.posthog.com`；公开Project API key位于 `js/analytics-config.js`，不是Personal API key。只允许测试参数启动采集，`liveEnabled=false`。没有改套餐、启用新服务或升级，也不合并main、不发布正式站。
+接入现有项目 `https://us.i.posthog.com`；公开Project API key位于 `js/analytics-config.js`，不是Personal API key。发布候选启用live配置，但只有精确正式origin `https://ember-film-experiment.vercel.app` 能发送live；Preview只能发送明确标记的test。发送端只接受source=wechat_moments；direct和other仅在本地保存归因，不发送。此分支尚未合并main。没有改套餐、启用新服务或升级，也不合并main、不发布正式站。
 
 Cloudflare/D1方案暂停，相关本地草稿保留在仓库外，不包含在本分支提交。PostHog SDK不加载：没有autocapture、自动$pageview、录屏、identify、Cookie或个人档案调用。通过显式HTTP capture只发3个事件。
 
@@ -30,7 +30,7 @@ Cloudflare/D1方案暂停，相关本地草稿保留在仓库外，不包含在�
 
 在新的隐私窗口/空sessionStorage打开测试链接：打开→开始选→完成三个选择→显示推荐，再换片、改选、刷新。后台筛选site=cinema、source=wechat_moments、traffic=test和本次操作时间段，3个事件各应增加1，其后操作不增加。核验网络capture成功不等于事件已在后台可查。
 
-本地已通过67项测试；真实Chromium使用拦截的PostHogHTTP响应验证3次发送、字段白名单、换片/改选/刷新去重与测试来源保留。这不是实际PostHog入库，也不是已部署Preview证据。原电影选择流程的27组浏览器回归另行运行。
+本地已通过68项测试；真实Chromium使用拦截的PostHogHTTP响应验证3次发送、字段白名单、换片/改选/刷新去重与测试来源保留。这不是实际PostHog入库，也不是已部署Preview证据。原电影选择流程的27组浏览器回归另行运行。
 
 ## 在哪里看数字
 
@@ -44,4 +44,6 @@ Cloudflare/D1方案暂停，相关本地草稿保留在仓库外，不包含在�
 
 ## 发布边界
 
-当前代码仅在配置公开token且该会话traffic=test时发事件。Preview验收后仍需用户确认才更新正式站及liveEnabled。不能把“推送分支”当作已取得可访问Preview；不能把公开Project token当作后台读权限。
+正式发布候选保持Preview不产生live，带analytics_test=1产生test。用户已条件授权发布，但真实换片/改选/刷新去重尚未全部验收，因此目前不合并main；验收满足后方可更新正式站。不能把“推送分支”当作已取得可访问Preview；不能把公开Project token当作后台读权限。
+
+正式报表SQL见 `docs/cinema-wechat-report.sql`，仅筛选cinema/wechat_moments/live，因此排除所有测试记录；需有后台读取权限的管理员创建并保存Insight，不把本地SQL文件声称为已存在的后台报表。项目级Discard client IP data已由用户截图确认启用，新的Cinema测试事件未显示真实IP；旧事件不会因此自动清除。
