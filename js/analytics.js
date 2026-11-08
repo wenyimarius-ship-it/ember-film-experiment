@@ -5,7 +5,7 @@ const params = new URLSearchParams(window.location.search);
 let storage;
 try { storage = window.sessionStorage; } catch { /* Storage disabled: in-memory fallback. */ }
 const traffic = params.get('analytics_test') === '1' ? 'test' : 'live';
-const liveAllowed = analyticsConfig.liveEnabled && window.location.origin === analyticsConfig.productionOrigin;
+const liveAllowed = analyticsConfig.liveEnabled && analyticsConfig.productionOrigins.includes(window.location.origin);
 // Freeze mode for this tab session, so a reload without test parameters cannot become live.
 let sessionTraffic = traffic;
 try {

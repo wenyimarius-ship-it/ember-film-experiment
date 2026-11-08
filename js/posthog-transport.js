@@ -6,7 +6,7 @@ export function createPostHogSender({apiHost,projectToken,site,traffic,send=fetc
   if (endpoint.origin !== 'https://us.i.posthog.com') throw new TypeError('Unexpected PostHog host');
   if (!/^phc_[A-Za-z0-9]+$/.test(projectToken)) throw new TypeError('Missing public PostHog project key');
   return async (name,{source}) => {
-    if (!Object.hasOwn(events,name) || source !== 'wechat_moments') return;
+    if (!Object.hasOwn(events,name)) return;
     const response = await send(endpoint.href,{
       method:'POST',mode:'cors',credentials:'omit',referrerPolicy:'no-referrer',keepalive:true,
       headers:{'Content-Type':'application/json'},
