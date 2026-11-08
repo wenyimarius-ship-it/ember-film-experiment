@@ -100,6 +100,9 @@ npm run test:browser
 
 上线后检查：首页资源正常、三题可完成、单部电影及理由显示、换片和候选耗尽提示正确、复制提示正常、返回入口为 `https://lab.mariustang.com/`。推送代码与实际 Vercel 部署是不同步骤；仓库交付本身不表示已获得线上 URL。
 
+
+分享元信息使用正式地址 `https://cinema.mariustang.com/`。发布后检查网页源码中的 canonical、Open Graph 与 Twitter Card，并确认分享图 `/og.png` 返回 PNG。
+
 ## 首轮改造验收
 
 见 [代码核查与验收记录](docs/first-visit-review.md)。自动化通过不代表真人完成率、90 秒目标或观看意愿已通过；必须另请 3 名陌生访客真机试玩，记录耗时、理由复述和第一部观看意愿。
