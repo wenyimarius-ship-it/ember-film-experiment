@@ -1,3 +1,5 @@
+import {mountCloudVault} from './cloud-vault.js';
+import {analyticsConfig} from './analytics-config.js';
 import {trackFunnel} from './analytics.js';
 import {questions} from './questions.js';
 import {candidates, headlineReason} from './engine.js';
@@ -189,3 +191,11 @@ document.addEventListener('keydown', event => {
   }
 });
 render();
+
+mountCloudVault({site:'cinema',getState:()=>({schema:1,data:{answers:[...answers],scene,resultIndex,confirmed}}),restore:payload=>{
+ const d=payload?.data;
+ if(payload?.schema!==1||!d||!Array.isArray(d.answers)||d.answers.length!==3||!d.answers.every(v=>v===null||Number.isInteger(v)&&v>=0&&v<=2)||!Number.isInteger(d.scene)||d.scene< -1||d.scene>3||d.scene===3&&d.answers.some(v=>v===null)||!Number.isInteger(d.resultIndex)||d.resultIndex<0||typeof d.confirmed!=='boolean')throw Error('invalid_payload');
+ clearTimeout(transitionTimer);answers.splice(0,3,...d.answers);scene=d.scene;
+ if(scene===3){prepareResults();resultIndex=Math.min(d.resultIndex,result.length-1);confirmed=d.confirmed}
+ render();
+},analytics:{enabled:analyticsConfig.liveEnabled&&analyticsConfig.productionOrigins.includes(location.origin),token:analyticsConfig.projectToken,apiHost:analyticsConfig.apiHost}});

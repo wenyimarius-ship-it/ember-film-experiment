@@ -42,3 +42,7 @@ npm run test:funnel:browser
 ## 部署
 
 Vercel 项目 `ember-film-experiment` 对应本仓库 `main`，Production 记录为 READY（`2c610c6`）。[vercel.json](vercel.json) 指定静态根目录作为输出，无安装或构建步骤，并通过 CSP 允许 PostHog 采集端点。项目无需服务器端环境变量。当前核对的是平台记录与源码配置，实际统计入库与用户体验需要单独验收。
+
+## 云端副本
+
+新增主动保存与恢复入口，默认仍在本地使用。恢复码支持换设备取回、更新、删除云端副本；正文进入 Supabase，PostHog 只记录行为。详见 [接入与权限说明](docs/cloud-persistence.md)。
