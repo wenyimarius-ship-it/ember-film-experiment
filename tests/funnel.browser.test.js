@@ -28,6 +28,8 @@ try {
    await route.fulfill({status:200,headers:{'Access-Control-Allow-Origin':'*'},json:{status:1}});
  });
  page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(base);
+ await page.waitForTimeout(100);assert.equal(received.length,0,'untagged Preview does not collect or lock test mode');
  await page.goto(`${base}/?utm_source=wechat_moments&analytics_test=1&answer=DO_NOT_SEND`);
  await page.getByRole('button',{name:'开始选',exact:true}).click();
  for(let i=0;i<3;i++){

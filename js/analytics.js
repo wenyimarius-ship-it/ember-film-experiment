@@ -9,8 +9,9 @@ const traffic = params.get('analytics_test') === '1' ? 'test' : 'live';
 let sessionTraffic = traffic;
 try {
   const saved = storage?.getItem('cinema.funnel.traffic.v1');
-  if (saved === 'test' || saved === 'live') sessionTraffic = saved;
-  else storage?.setItem('cinema.funnel.traffic.v1',traffic);
+  if (saved === 'test' || (saved === 'live' && analyticsConfig.liveEnabled)) sessionTraffic = saved;
+  // Merely opening a disabled, untagged Preview must not block a later test link.
+  else if (traffic === 'test' || analyticsConfig.liveEnabled) storage?.setItem('cinema.funnel.traffic.v1',traffic);
 } catch { /* Keep in-memory mode. */ }
 const enabled = analyticsConfig.projectToken && (sessionTraffic === 'test' || analyticsConfig.liveEnabled);
 const record = enabled ? createFunnel({storage,search:window.location.search,emit:createPostHogSender({
