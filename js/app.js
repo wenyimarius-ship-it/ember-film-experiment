@@ -1,3 +1,4 @@
+import {trackFunnel} from './analytics.js';
 import {questions} from './questions.js';
 import {candidates, headlineReason} from './engine.js';
 
@@ -19,9 +20,9 @@ function render({focus = true} = {}) {
   clearTimeout(transitionTimer);
   advancing = false;
   viewVersion++;
-  if (scene === -1) renderIntro();
+  if (scene === -1) { renderIntro(); trackFunnel('open'); }
   else if (scene < 3) renderQuestion();
-  else renderResults();
+  else { renderResults(); trackFunnel('complete'); }
   if (focus) {
     main.querySelector('h1').focus({preventScroll: true});
     window.scrollTo({top: 0, behavior: 'instant'});
@@ -145,7 +146,7 @@ main.addEventListener('click', event => {
   if (button.hasAttribute('data-choice')) { select(Number(button.dataset.choice)); return; }
   if (button.hasAttribute('data-edit')) { scene = Number(button.dataset.edit); render(); return; }
   switch (button.dataset.action) {
-    case 'begin': scene = 0; break;
+    case 'begin': trackFunnel('start'); scene = 0; break;
     case 'back': scene--; break;
     case 'restart': answers.fill(null); result = []; scene = -1; break;
     case 'confirm':
