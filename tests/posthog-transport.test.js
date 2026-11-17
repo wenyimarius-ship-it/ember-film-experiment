@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createPostHogSender} from '../js/posthog-transport.js';
 const config={apiHost:'https://us.i.posthog.com',projectToken:'phc_localTestOnly',site:'cinema',traffic:'test'};
-test('only three custom events and explicitly allowed anonymous properties',async()=>{
+test('only the three funnel events and explicitly allowed anonymous properties',async()=>{
  const received=[];const emit=createPostHogSender({...config,send:async(url,options)=>{received.push({url,options,body:JSON.parse(options.body)});return {ok:true};}});
  for(const name of ['cinema_open','cinema_start','cinema_complete'])await emit(name,{source:'wechat_moments'});
  assert.deepEqual(received.map(r=>r.body.event),['funnel_open','funnel_start','funnel_complete']);
@@ -24,4 +24,28 @@ test('only WeChat source is sent, including when live capture is enabled',async(
  let count=0;const emit=createPostHogSender({...config,traffic:'live',send:async()=>{count++;return {ok:true};}});
  for(const source of ['direct','other','email@example.com'])await emit('cinema_open',{source});
  assert.equal(count,0);await emit('cinema_open',{source:'wechat_moments'});assert.equal(count,1);
+});
+
+test('feedback uses the same capture protocol with an exact property whitelist and no answers',async()=>{
+ const received=[];
+ const emit=createPostHogSender({...config,send:async(url,options)=>{received.push({url,options,body:JSON.parse(options.body)});return {ok:true};}});
+ for(const rating of ['accurate','partial','off'])await emit('cinema_feedback',{rating,film_id:'whiplash',swap_count:0,source:'direct',answers:[0,1,2],recovery_code:'SECRET',email:'private@example.com',url:'https://private.example',traffic:'live',site:'puzzle'});
+ assert.equal(received.length,3);
+ for(const [index,r] of received.entries()){
+  assert.equal(r.body.event,'cinema_feedback');
+  assert.deepEqual(r.body.properties,{distinct_id:'ember-funnel-aggregate',site:'cinema',rating:['accurate','partial','off'][index],film_id:'whiplash',swap_count:0,traffic:'test',$process_person_profile:false,$geoip_disable:true});
+  assert.equal(r.url,'https://us.i.posthog.com/capture/');
+  assert.equal(r.options.credentials,'omit');assert.equal(r.options.referrerPolicy,'no-referrer');
+  assert.equal(r.options.keepalive,true);
+ }
+ assert.equal(JSON.stringify(received).includes('SECRET'),false);
+});
+
+test('feedback rejects invalid payloads and Puzzle site, and exposes capture failure',async()=>{
+ const send=async()=>assert.fail('invalid payload sent');
+ const emit=createPostHogSender({...config,send});
+ const valid={rating:'accurate',film_id:'whiplash',swap_count:0};
+ for(const data of [null,{}, {...valid,rating:'unknown'},{...valid,film_id:'private'},{...valid,swap_count:-1}])await emit('cinema_feedback',data);
+ await createPostHogSender({...config,site:'puzzle',send})('cinema_feedback',valid);
+ await assert.rejects(()=>createPostHogSender({...config,send:async()=>({ok:false,status:503})})('cinema_feedback',valid),/503/);
 });

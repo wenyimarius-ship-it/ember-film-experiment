@@ -37,7 +37,9 @@ npm run test:funnel:browser
 | [js/engine.js](js/engine.js) | 校验、确定性排序与理由生成 |
 | [js/analytics.js](js/analytics.js) · [js/analytics-config.js](js/analytics-config.js) | PostHog 手动事件及允许的正式 origin |
 
-统计记录打开、开始与完成节点，按标签页会话区分流量来源。正式来源包括自定义域名和默认域名，也可通过 `analytics_test=1` 进入测试流量。统计请求不包含题目答案，推荐本身不依赖统计服务或远端推荐接口。[统计接入说明](docs/analytics-posthog.md) 中的发布候选与仅朋友圈来源口径属于历史记录，当前来源以源码为准。
+统计记录打开、开始与完成节点，以及成功的云端操作；现有漏斗发送器仅发送朋友圈来源（`utm_source=wechat_moments`）的节点事件。结果页新增“准 / 有点偏 / 不准”反馈，不影响推荐排序或任何主操作。`cinema_feedback` 的业务属性只有 `site`、`rating`（`accurate / partial / off`）、`film_id`（公开片库 ID，可对应片名）、`swap_count`（首推为 0）和 `traffic`；另带既有固定聚合标记及关闭用户画像、地理定位的设置。不发送题目答案、恢复码、IP、邮箱、完整页面 URL 或用户输入文本。
+
+反馈仅在配置的正式 origin（自定义域名与默认域名）发送，不限制朋友圈来源；本地及未配置环境即使带 `analytics_test=1` 也不发送反馈。正式 origin 上 `analytics_test=1` 标记 `traffic=test`，其余为 `live`；测试标记在同一标签页会话中保留。同一会话按“影片 ID + 换片次数”仅尝试发送一次，换片后可再次反馈；失败不重试，界面只显示“谢谢你的反馈”，不声称已经入库。存储不可用时降级为页面内去重。推荐本身不依赖统计服务，详见[统计接入说明](docs/analytics-posthog.md)。
 
 ## 部署
 

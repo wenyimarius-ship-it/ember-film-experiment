@@ -72,3 +72,6 @@ try {
  console.log('PASS: non-production host cannot send live; production WeChat emits3 live events; direct production visit emits0');
 
 }finally{await browser?.close();await new Promise(resolve=>server.close(resolve));}
+
+// Keep feedback's browser regression in the existing analytics test command.
+await import('./feedback.browser.test.js');
