@@ -27,10 +27,10 @@ let browser;
 try{
  browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),headless:true,args:['--no-sandbox']});
  const errors=[];
- const scenarios=[{width:320,answers:[0,2,1]},{width:375,answers:[0,2,1]},{width:1440,answers:[0,2,1]},{width:375,answers:[0,0,0]},{width:1440,answers:[0,0,0]}];
- for(const {width,answers} of scenarios){
-  const pool=candidates(answers),inception=pool.findIndex(c=>c.film.id==='inception');
-  assert.ok(inception>=0);
+ const scenarios=[{width:320,answers:[0,2,1]},{width:375,answers:[0,2,1]},{width:1440,answers:[0,2,1]},{width:375,answers:[0,0,0]},{width:1440,answers:[0,0,0]},{width:375,answers:[0,0,0],filmId:'spirited-away'},{width:1440,answers:[0,0,0],filmId:'spirited-away'}];
+ for(const {width,answers,filmId='inception'} of scenarios){
+  const pool=candidates(answers),filmIndex=pool.findIndex(c=>c.film.id===filmId);
+  assert.ok(filmIndex>=0);
   const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce',acceptDownloads:true});
   const page=await context.newPage();
   page.on('pageerror',e=>errors.push(e.message));
@@ -52,17 +52,22 @@ try{
    await page.locator(`[data-choice="${answers[i]}"]`).click();
    await page.waitForFunction(n=>document.querySelector('[role=progressbar]')?.getAttribute('aria-valuenow')!==String(n),i+1);
   }
-  for(let i=0;i<inception;i++)await page.getByRole('button',{name:'换一部',exact:true}).click();
-  const candidate=pool[inception],f=candidate.film;
+  for(let i=0;i<filmIndex;i++)await page.getByRole('button',{name:'换一部',exact:true}).click();
+  const candidate=pool[filmIndex],f=candidate.film;
   assert.equal(await page.locator('h1').textContent(),f.zh);
   const sentence=recommendationSentence(candidate);
   assert.equal(await page.locator('.headline-reason').textContent(),sentence);
   assert.notEqual(sentence,headlineReason(candidate));
   assert.deepEqual(await page.locator('.film-details p').allTextContents(),[f.summary,...candidate.reasons.map(r=>`${matchHeading(r)}：${r.reason}`),`${matchSummary(candidate)}部分影片包含暴力或沉重主题。`]);
-  if(answers.join('')==='000')assert.equal(candidate.reasons.length,1,'single-match poster never adds rhythm or ending evidence');
+  if(filmId==='inception'&&answers.join('')==='000')assert.equal(candidate.reasons.length,1,'single-match poster never adds rhythm or ending evidence');
   assert.equal(await page.locator('.film-details').getAttribute('open'),null,'export works while details remain collapsed');
   assert.ok(await page.locator('.single-title h1').evaluate(el=>parseFloat(getComputedStyle(el).fontSize))<=(width>640?32:23));
   assert.ok(await page.locator('.headline-reason').evaluate(el=>parseFloat(getComputedStyle(el).fontSize))<=13);
+  if(filmId==='spirited-away'){
+   assert.equal(candidate.reasons.length,2);
+   assert.equal(sentence,'它把勇气落在一次次小小的尝试里，让主动权的建立变得可感。');
+   assert.doesNotMatch(sentence,/千寻|神灵|陌生世界|回家/);
+  }
   const save=page.getByRole('button',{name:'保存电影海报',exact:true});
   assert.ok((await save.getAttribute('class')).includes('primary'));
   await save.focus();await page.keyboard.press('Enter');
@@ -72,7 +77,7 @@ try{
   const data=await image.getAttribute('src');assert.ok(data.startsWith('data:image/png;base64,'));
   const download=dialog.getByRole('link',{name:'下载 PNG',exact:false});
   assert.equal(await download.getAttribute('href'),data);
-  assert.equal(await download.getAttribute('download'),'cinema-inception.png');
+  assert.equal(await download.getAttribute('download'),`cinema-${f.id}.png`);
   const alt=await image.getAttribute('alt');
   for(const text of [f.zh,f.title,String(f.year),f.region,f.style,f.summary,recommendationSentence(candidate),matchSummary(candidate),...candidate.reasons.map(r=>r.reason)])assert.ok(alt.includes(text),text);
   const drawn=await page.evaluate(()=>window.posterDraws.filter(t=>t.width===1200&&t.height>=1500));
@@ -84,10 +89,10 @@ try{
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   for(let i=0;i<8;i++){await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>Boolean(document.activeElement.closest('dialog'))),true,'native modal traps keyboard focus');}
   const filePromise=page.waitForEvent('download');await download.click();const file=await filePromise;
-  const savedPath=path.join(root,`test-results/${width}-${candidate.reasons.length}-matches-inception.png`);await file.saveAs(savedPath);
+  const savedPath=path.join(root,`test-results/${width}-${candidate.reasons.length}-matches-${f.id}.png`);await file.saveAs(savedPath);
   const bytes=await readFile(savedPath);assert.equal(bytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
   assert.equal(bytes.readUInt32BE(16),1200);assert.ok(bytes.readUInt32BE(20)>=1500);
-  await page.screenshot({path:path.join(root,`test-results/${width}-${candidate.reasons.length}-matches-poster-preview.png`),fullPage:true});
+  await page.screenshot({path:path.join(root,`test-results/${width}-${candidate.reasons.length}-matches-${f.id}-poster-preview.png`),fullPage:true});
   await page.keyboard.press('Escape');
   await dialog.waitFor({state:'hidden'});
   assert.equal(await save.evaluate(el=>el===document.activeElement),true,'Escape restores focus to entry point');
@@ -103,7 +108,7 @@ try{
     '今晚就看这部。',`${f.zh} / ${f.title} (${f.year})`,...questions.map((q,i)=>`${i+1}. ${q.choices[answers[i]].label}`),'Cinema Experiment · Ember Lab · https://cinema.mariustang.com/'
   ]);
   assert.equal(copied.split('\n')[2],sentence);
-  await page.screenshot({path:path.join(root,`test-results/${width}-${candidate.reasons.length}-matches-poster-result.png`),fullPage:true});
+  await page.screenshot({path:path.join(root,`test-results/${width}-${candidate.reasons.length}-matches-${f.id}-poster-result.png`),fullPage:true});
   // A failed encoder remains recoverable and does not disturb the result page.
   await page.evaluate(()=>{window.originalToBlob=HTMLCanvasElement.prototype.toBlob;HTMLCanvasElement.prototype.toBlob=function(callback){callback(null);};});
   await save.click();await dialog.locator('.poster-status').filter({hasText:'海报暂时无法生成'}).waitFor();
@@ -114,7 +119,7 @@ try{
   await save.click();await page.waitForFunction(()=>typeof window.finishOldPoster==='function');
   await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});
   await page.getByRole('button',{name:'换一部',exact:true}).click();
-  const next=pool[inception+1];assert.ok(next);
+  const next=pool[filmIndex+1];assert.ok(next);
   await page.evaluate(()=>{HTMLCanvasElement.prototype.toBlob=window.originalToBlob;window.finishOldPoster();});
   assert.equal(await page.locator('h1').textContent(),next.film.zh);
   await page.getByRole('button',{name:'保存电影海报',exact:true}).click();
