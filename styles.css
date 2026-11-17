@@ -79,3 +79,48 @@ footer{flex-wrap:wrap;column-gap:24px;row-gap:8px}footer .privacy-note{flex-basi
 .feedback-options button:disabled{cursor:default;opacity:.6}
 .feedback-status{min-height:22px;margin:4px 0 0;color:var(--accent);font-size:12px;line-height:22px}
 .feedback-status:focus{outline:none}
+
+/* Result typography and the independent image export. */
+.single-result{font-family:Georgia,"Songti SC",serif}
+.single-title h1{font-size:clamp(25px,2.4vw,32px);line-height:1.4}
+.single-result .original-title{font-size:16px;font-style:italic}
+.single-result .headline-reason{font-size:13px;line-height:1.9}
+.single-result .film-details{font-size:11px;line-height:1.9}
+.single-result .poster-title{font-size:32px}
+.confirmation-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.confirmation-row .confirm-status{font-size:20px;line-height:1.5;margin:16px 0;color:var(--accent)}
+.confirmed-badge{border:1px solid var(--line);padding:2px 8px;font-size:10px;color:var(--accent)}
+.single-actions .save-poster{justify-content:center;gap:12px;min-width:220px}
+.poster-note{font-size:10px;letter-spacing:.5px;color:var(--muted);margin:9px 0 0}
+.single-result .secondary-actions{gap:24px;margin-top:2px}
+.single-result .secondary-actions .text-button{font-size:11px;text-decoration:underline;text-underline-offset:4px}
+.poster-dialog{width:min(840px,calc(100vw - 32px));max-height:94svh;padding:24px 32px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:14px/1.6 Georgia,"Songti SC",serif;overscroll-behavior:contain}
+.poster-dialog::backdrop{background:#000c;backdrop-filter:blur(8px)}
+.poster-dialog-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:20px}
+.poster-dialog-header h2{font-size:23px;letter-spacing:1px;margin:0}
+.poster-dialog-header p{font-size:12px;color:var(--muted);margin:3px 0 0;letter-spacing:1px}
+.poster-dialog .poster-close{min-width:44px;min-height:44px;cursor:pointer}
+.poster-dialog-header .poster-close{font:30px/1 Georgia,serif;border:0;background:none;color:var(--ink);padding:0}
+.poster-preview{max-width:600px;margin:0 auto;min-height:80px}
+.poster-preview img{display:block;width:100%;height:auto;border:1px solid var(--line);-webkit-touch-callout:default;user-select:auto}
+.poster-status{min-height:22px;margin:12px 0;color:var(--muted);text-align:center;font-size:12px}
+.poster-dialog-actions{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--line)}
+.poster-dialog-actions .primary,.poster-dialog-actions .secondary{font-size:14px;min-height:46px;padding:10px 24px;gap:12px;justify-content:center}
+.poster-dialog-actions span{font-size:12px;color:var(--muted)}
+.poster-download[hidden]{display:none}
+@media(max-width:640px){
+ .single-title h1{font-size:23px}
+ .single-result .original-title{font-size:13px}
+ .single-result .headline-reason{font-size:12px}
+ .single-result .film-details{font-size:10px}
+ .single-result .poster-title{font-size:15px}
+ .single-actions .save-poster{min-width:0;flex:1.5;gap:7px;white-space:nowrap}
+ .single-actions .result-actions .save-poster{font-size:12px;padding:12px 10px}
+ .confirmation-row .confirm-status{font-size:18px;margin:8px 0}
+ .poster-dialog{padding:18px 14px;width:calc(100vw - 16px);max-height:96svh;border-radius:6px}
+ .poster-dialog-header{margin-bottom:14px}
+ .poster-dialog-header h2{font-size:20px}
+ .poster-dialog-actions{gap:12px;padding-top:16px}
+ .poster-dialog-actions .primary,.poster-dialog-actions .secondary{padding:10px 18px}
+ .poster-dialog-actions span{width:100%;text-align:center}
+}
