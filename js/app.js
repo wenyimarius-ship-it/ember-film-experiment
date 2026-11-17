@@ -1,6 +1,6 @@
 import {mountCloudVault} from './cloud-vault.js';
 import {analyticsConfig} from './analytics-config.js';
-import {trackFunnel} from './analytics.js';
+import {trackFunnel, trackFeedback, feedbackRating} from './analytics.js';
 import {questions} from './questions.js';
 import {candidates, headlineReason} from './engine.js';
 
@@ -78,6 +78,10 @@ function renderResults() {
         <p class="film-meta">${f.year} · ${escape(f.region)} · ${escape(f.style)}</p>
       </div>
       <div class="single-reason"><p class="reason-label">为什么推荐它</p><p class="headline-reason">${escape(headlineReason(candidate))}</p>
+        <div class="result-feedback">
+          <div class="feedback-row"><span>这部准不准？</span><div class="feedback-options" role="group" aria-label="这部准不准？">${[['accurate','准'],['partial','有点偏'],['off','不准']].map(([rating,label]) => `<button type="button" data-feedback="${rating}" aria-pressed="false">${label}</button>`).join('')}</div></div>
+          <p id="feedback-status" class="feedback-status" role="status" aria-live="polite" tabindex="-1"></p>
+        </div>
         <details class="film-details"><summary>影片简介与匹配依据</summary><p>${escape(f.summary)}</p>${candidate.reasons.map(r => `<p><strong>${escape(r.choice)}</strong>：${escape(r.reason)}</p>`).join('')}<p class="muted">对应 ${candidate.reasons.length} / 3 个选择；仅解释实际匹配的偏好。部分影片包含暴力或沉重主题。</p></details>
       </div>
       <div class="single-actions"><p id="confirm-status" class="confirm-status" role="status">${confirmed ? '今晚就看这部。' : ''}</p>
@@ -90,6 +94,16 @@ function renderResults() {
     </article>
     <div class="answer-summary" aria-label="你的选择">${questions.map((q, i) => `<button data-edit="${i}" aria-label="修改第 ${i + 1} 题：${q.choices[answers[i]].short}"><span>0${i + 1}</span> ${q.choices[answers[i]].short} <span aria-hidden="true">↗</span></button>`).join('')}</div>
   </section>`;
+  updateFeedback();
+}
+
+function updateFeedback() {
+  const rating = feedbackRating(result[resultIndex].film.id, resultIndex);
+  main.querySelectorAll('[data-feedback]').forEach(button => {
+    button.disabled = Boolean(rating);
+    button.setAttribute('aria-pressed', String(button.dataset.feedback === rating));
+  });
+  main.querySelector('#feedback-status').textContent = rating ? '谢谢你的反馈' : '';
 }
 
 function copyText() {
@@ -145,6 +159,12 @@ function select(choice) {
 main.addEventListener('click', event => {
   const button = event.target.closest('button');
   if (!button || button.disabled) return;
+  if (button.hasAttribute('data-feedback') && scene === 3) {
+    trackFeedback(result[resultIndex].film.id, resultIndex, button.dataset.feedback);
+    updateFeedback();
+    main.querySelector('#feedback-status').focus({preventScroll:true});
+    return;
+  }
   if (button.hasAttribute('data-choice')) { select(Number(button.dataset.choice)); return; }
   if (button.hasAttribute('data-edit')) { scene = Number(button.dataset.edit); render(); return; }
   switch (button.dataset.action) {

@@ -69,3 +69,13 @@
 
 /* Keep the privacy note on its own row across desktop and mobile widths. */
 footer{flex-wrap:wrap;column-gap:24px;row-gap:8px}footer .privacy-note{flex-basis:100%;min-width:0;line-height:1.8}
+
+.result-feedback{margin:14px 0 8px}
+.feedback-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:12px/1.5 Georgia,"Songti SC",serif}
+.feedback-options{display:flex;gap:8px}
+.feedback-options button{min-width:44px;min-height:44px;padding:8px 10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:12px}
+.feedback-options button:hover:not(:disabled){border-color:var(--accent)}
+.feedback-options button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);opacity:1}
+.feedback-options button:disabled{cursor:default;opacity:.6}
+.feedback-status{min-height:22px;margin:4px 0 0;color:var(--accent);font-size:12px;line-height:22px}
+.feedback-status:focus{outline:none}
