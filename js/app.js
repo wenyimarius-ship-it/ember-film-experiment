@@ -113,7 +113,7 @@ function updateFeedback() {
 function copyText() {
   const candidate = result[resultIndex];
   const f = candidate.film;
-  return [`今晚就看这部。`, `${f.zh} / ${f.title} (${f.year})`, headlineReason(candidate), ...questions.map((q, i) => `${i + 1}. ${q.choices[answers[i]].label}`), 'Cinema Experiment · Ember Lab · https://lab.mariustang.com/'].join('\n');
+  return [`今晚就看这部。`, `${f.zh} / ${f.title} (${f.year})`, headlineReason(candidate), ...questions.map((q, i) => `${i + 1}. ${q.choices[answers[i]].label}`), 'Cinema Experiment · Ember Lab · https://cinema.mariustang.com/'].join('\n');
 }
 
 async function copyResults(button) {

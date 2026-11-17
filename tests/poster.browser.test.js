@@ -88,7 +88,7 @@ try{
   await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async text=>{window.copied=text;}}}));
   await page.getByRole('button',{name:'复制片名与理由',exact:true}).click();
   await page.locator('#copy-status').filter({hasText:'已复制'}).waitFor();
-  const expected=['今晚就看这部。',`${f.zh} / ${f.title} (${f.year})`,headlineReason(candidate),...questions.map((q,i)=>`${i+1}. ${q.choices[answers[i]].label}`),'Cinema Experiment · Ember Lab · https://lab.mariustang.com/'].join('\n');
+  const expected=['今晚就看这部。',`${f.zh} / ${f.title} (${f.year})`,headlineReason(candidate),...questions.map((q,i)=>`${i+1}. ${q.choices[answers[i]].label}`),'Cinema Experiment · Ember Lab · https://cinema.mariustang.com/'].join('\n');
   assert.equal(await page.evaluate(()=>window.copied),expected,'copy payload is byte-for-byte unchanged');
   await page.screenshot({path:path.join(root,`test-results/${width}-poster-result.png`),fullPage:true});
   // A failed encoder remains recoverable and does not disturb the result page.
