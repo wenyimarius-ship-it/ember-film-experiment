@@ -3,8 +3,10 @@ import {analyticsConfig} from './analytics-config.js';
 import {trackFunnel, trackFeedback, feedbackRating} from './analytics.js';
 import {questions} from './questions.js';
 import {candidates, headlineReason} from './engine.js';
+import {createPosterDialog} from './poster.js';
 
 const main = document.querySelector('main');
+const posterDialog = createPosterDialog();
 const answers = [null, null, null];
 const letters = ['A', 'B', 'C'];
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -19,6 +21,7 @@ let viewVersion = 0;
 const escape = text => String(text).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
 function render({focus = true} = {}) {
+  posterDialog.close();
   clearTimeout(transitionTimer);
   advancing = false;
   viewVersion++;
@@ -84,10 +87,11 @@ function renderResults() {
         </div>
         <details class="film-details"><summary>影片简介与匹配依据</summary><p>${escape(f.summary)}</p>${candidate.reasons.map(r => `<p><strong>${escape(r.choice)}</strong>：${escape(r.reason)}</p>`).join('')}<p class="muted">对应 ${candidate.reasons.length} / 3 个选择；仅解释实际匹配的偏好。部分影片包含暴力或沉重主题。</p></details>
       </div>
-      <div class="single-actions"><p id="confirm-status" class="confirm-status" role="status">${confirmed ? '今晚就看这部。' : ''}</p>
-        <div class="result-actions"><button class="primary" data-action="confirm" ${confirmed ? 'disabled' : ''}>${confirmed ? '已选定' : '就看这部'} <span aria-hidden="true">✓</span></button><button class="secondary" data-action="swap" ${exhausted ? 'disabled' : ''}>换一部 <span aria-hidden="true">↻</span></button></div>
+      <div class="single-actions"><div class="confirmation-row"><p id="confirm-status" class="confirm-status" role="status">${confirmed ? '今晚就看这部。' : ''}</p>${confirmed ? '<span class="confirmed-badge">已选定 ✓</span>' : ''}</div>
+        <div class="result-actions"><button class="primary save-poster" data-action="poster"><span aria-hidden="true">↓</span> 保存电影海报</button><button class="secondary" data-action="swap" ${exhausted ? 'disabled' : ''}>换一部 <span aria-hidden="true">↻</span></button></div>
+        <p class="poster-note">独立排版，保存为图片</p>
         <p id="candidate-status" class="candidate-status" role="status">${exhausted ? '符合这次选择的候选已看完。可以修改选择，寻找新的方向。' : ''}</p>
-        <div class="secondary-actions">${confirmed ? '<button class="text-button" data-action="copy">复制片名与理由</button>' : ''}<button class="text-button" data-edit="0">修改选择</button><button class="text-button" data-action="restart">重新体验</button></div>
+        <div class="secondary-actions">${confirmed ? '<button class="text-button" data-action="copy">复制片名与理由</button>' : '<button class="text-button" data-action="confirm">就看这部</button>'}<button class="text-button" data-edit="0">修改选择</button><button class="text-button" data-action="restart">重新体验</button></div>
         <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
         <div id="copy-fallback" hidden><label for="copy-text">请选中下方结果手动复制：</label><textarea id="copy-text" readonly rows="5"></textarea></div>
       </div>
@@ -189,6 +193,7 @@ main.addEventListener('click', event => {
       confirmed = false;
       render();
       return;
+    case 'poster': posterDialog.open(result[resultIndex], button); return;
     case 'copy': copyResults(button); return;
     default: return;
   }

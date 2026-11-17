@@ -154,3 +154,5 @@ try {
   console.log('PASS H/accessibility: 320/375/390/768/1440px, first-fold controls, three scene screenshots, keyboard, reduced motion, image blocking, double-tap guard; no page/CSP errors or external runtime requests');
   await context.close();
 }finally{await browser?.close();await new Promise(resolve=>server.close(resolve));}
+
+await import('./poster.browser.test.js');
