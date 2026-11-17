@@ -84,6 +84,7 @@ try {
   await page.getByRole('button',{name:'复制片名与理由'}).click();
   await page.locator('#copy-status').filter({hasText:'已复制'}).waitFor();
   const copied=await page.evaluate(()=>window.copied);
+  assert.equal(copied.split('\n').at(-1),'Cinema Experiment · Ember Lab · https://cinema.mariustang.com/');
   assert.ok(copied.includes(candidates([0,0,0])[0].film.zh));
   assert.ok(copied.includes(headlineReason(candidates([0,0,0])[0])));
   await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{throw Error('denied');}}}));
