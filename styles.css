@@ -66,3 +66,6 @@
   .single-result .answer-summary{margin-top:17px;padding-top:17px;gap:5px}
   .single-result .answer-summary button{font-size:9px;padding:8px}
 }
+
+/* Keep the privacy note on its own row across desktop and mobile widths. */
+footer{flex-wrap:wrap;column-gap:24px;row-gap:8px}footer .privacy-note{flex-basis:100%;min-width:0;line-height:1.8}

@@ -13,7 +13,7 @@ const server=createServer(async(req,res)=>{
  try {
   const url=new URL(req.url,base);
   let content;
-  if(url.pathname==='/js/analytics-config.js')content=`export const analyticsConfig={site:'cinema',apiHost:'https://us.i.posthog.com',projectToken:'phc_localTestOnly',liveEnabled:true,productionOrigin:'${productionOrigin}'};`;
+  if(url.pathname==='/js/analytics-config.js')content=`export const analyticsConfig={site:'cinema',apiHost:'https://us.i.posthog.com',projectToken:'phc_localTestOnly',liveEnabled:true,productionOrigins:['${productionOrigin}']};`;
   else content=await readFile(path.join(root,url.pathname==='/'?'index.html':url.pathname));
   res.writeHead(200,{'Content-Type':url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':'text/html','Content-Security-Policy':"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src https://us.i.posthog.com"});res.end(content);
  }catch{res.writeHead(404);res.end();}
