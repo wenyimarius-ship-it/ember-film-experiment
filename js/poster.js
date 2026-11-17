@@ -1,4 +1,4 @@
-import {headlineReason} from './engine.js';
+import {recommendationSentence, matchHeading, matchSummary} from './recommendation-copy.js';
 
 const colors = {bg:'#111310', ink:'#eeeee3', muted:'#a2a69a', accent:'#dce996', line:'#69724d'};
 const serif = 'Georgia, "Songti SC", "Noto Serif CJK SC", serif';
@@ -84,9 +84,9 @@ export async function createMoviePoster(candidate) {
   const originalY=textBlock(measure,film.title,480,titleY+8,612,34,46,colors.ink,'italic');
   const metaBottom=textBlock(measure,`${film.year} · ${film.region} · ${film.style}`,480,originalY+24,612,25,38);
   const sections=[
-    {label:'为什么推荐它', paragraphs:[headlineReason(candidate)]},
+    {label:'为什么推荐它', paragraphs:[recommendationSentence(candidate)]},
     {label:'影片简介', paragraphs:[film.summary]},
-    {label:'匹配依据', paragraphs:candidate.reasons.map(reason=>`${reason.choice}：${reason.reason}`)}
+    {label:'匹配依据', paragraphs:candidate.reasons.map(reason=>`${matchHeading(reason)}：${reason.reason}`)}
   ];
   let y=Math.max(770,metaBottom+44);
   const layout=sections.map(section=>{
@@ -97,7 +97,7 @@ export async function createMoviePoster(candidate) {
     y+=30;
     return item;
   });
-  const note=`对应 ${candidate.reasons.length} / 3 个选择；仅解释实际匹配的偏好。`;
+  const note=matchSummary(candidate);
   font(measure,23);
   const noteY=y+12;
   y+=linesFor(measure,note,984).length*36+76;
