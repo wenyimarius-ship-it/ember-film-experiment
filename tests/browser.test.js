@@ -6,6 +6,7 @@ import {existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {recommend,candidates,headlineReason} from '../js/engine.js';
+import {recommendationSentence,matchHeading,matchSummary} from '../js/recommendation-copy.js';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const deployment=JSON.parse(await readFile(path.join(root,'vercel.json'),'utf8'));
 const securityHeaders=Object.fromEntries(deployment.headers[0].headers.map(h=>[h.key,h.value]));
@@ -45,7 +46,14 @@ try {
   const expectFilm=async candidate=>{
     assert.equal(await heading().textContent(),candidate.film.zh);
     assert.equal(await page.locator('.single-card').count(),1);
-    assert.equal(await page.locator('.headline-reason').textContent(),headlineReason(candidate));
+    const sentence=await page.locator('.headline-reason').textContent();
+    assert.equal(sentence,recommendationSentence(candidate));
+    assert.notEqual(sentence,headlineReason(candidate));
+    assert.deepEqual(await page.locator('.film-details p').allTextContents(),[
+      candidate.film.summary,
+      ...candidate.reasons.map(reason=>`${matchHeading(reason)}：${reason.reason}`),
+      `${matchSummary(candidate)}部分影片包含暴力或沉重主题。`
+    ]);
   };
   // A–D, G: all answer combinations and every finite, grounded swap candidate.
   for(let a=0;a<3;a++)for(let b=0;b<3;b++)for(let c=0;c<3;c++) {
@@ -86,7 +94,7 @@ try {
   const copied=await page.evaluate(()=>window.copied);
   assert.equal(copied.split('\n').at(-1),'Cinema Experiment · Ember Lab · https://cinema.mariustang.com/');
   assert.ok(copied.includes(candidates([0,0,0])[0].film.zh));
-  assert.ok(copied.includes(headlineReason(candidates([0,0,0])[0])));
+  assert.ok(copied.includes(recommendationSentence(candidates([0,0,0])[0])));
   await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async()=>{throw Error('denied');}}}));
   await page.getByRole('button',{name:'复制片名与理由'}).click();
   await page.locator('#copy-fallback').waitFor({state:'visible'});

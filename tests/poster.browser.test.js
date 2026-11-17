@@ -6,6 +6,7 @@ import {existsSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 import {candidates,headlineReason} from '../js/engine.js';
+import {recommendationSentence,matchHeading,matchSummary} from '../js/recommendation-copy.js';
 import {questions} from '../js/questions.js';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
@@ -25,10 +26,11 @@ await mkdir(path.join(root,'test-results'),{recursive:true});
 let browser;
 try{
  browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),headless:true,args:['--no-sandbox']});
- const answers=[0,2,1],pool=candidates(answers),inception=pool.findIndex(c=>c.film.id==='inception');
- assert.ok(inception>=0);
  const errors=[];
- for(const width of [320,375,1440]){
+ const scenarios=[{width:320,answers:[0,2,1]},{width:375,answers:[0,2,1]},{width:1440,answers:[0,2,1]},{width:375,answers:[0,0,0]},{width:1440,answers:[0,0,0]},{width:375,answers:[0,0,0],filmId:'spirited-away'},{width:1440,answers:[0,0,0],filmId:'spirited-away'}];
+ for(const {width,answers,filmId='inception'} of scenarios){
+  const pool=candidates(answers),filmIndex=pool.findIndex(c=>c.film.id===filmId);
+  assert.ok(filmIndex>=0);
   const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce',acceptDownloads:true});
   const page=await context.newPage();
   page.on('pageerror',e=>errors.push(e.message));
@@ -50,12 +52,22 @@ try{
    await page.locator(`[data-choice="${answers[i]}"]`).click();
    await page.waitForFunction(n=>document.querySelector('[role=progressbar]')?.getAttribute('aria-valuenow')!==String(n),i+1);
   }
-  for(let i=0;i<inception;i++)await page.getByRole('button',{name:'换一部',exact:true}).click();
-  const candidate=pool[inception],f=candidate.film;
+  for(let i=0;i<filmIndex;i++)await page.getByRole('button',{name:'换一部',exact:true}).click();
+  const candidate=pool[filmIndex],f=candidate.film;
   assert.equal(await page.locator('h1').textContent(),f.zh);
+  const sentence=recommendationSentence(candidate);
+  assert.equal(await page.locator('.headline-reason').textContent(),sentence);
+  assert.notEqual(sentence,headlineReason(candidate));
+  assert.deepEqual(await page.locator('.film-details p').allTextContents(),[f.summary,...candidate.reasons.map(r=>`${matchHeading(r)}：${r.reason}`),`${matchSummary(candidate)}部分影片包含暴力或沉重主题。`]);
+  if(filmId==='inception'&&answers.join('')==='000')assert.equal(candidate.reasons.length,1,'single-match poster never adds rhythm or ending evidence');
   assert.equal(await page.locator('.film-details').getAttribute('open'),null,'export works while details remain collapsed');
   assert.ok(await page.locator('.single-title h1').evaluate(el=>parseFloat(getComputedStyle(el).fontSize))<=(width>640?32:23));
   assert.ok(await page.locator('.headline-reason').evaluate(el=>parseFloat(getComputedStyle(el).fontSize))<=13);
+  if(filmId==='spirited-away'){
+   assert.equal(candidate.reasons.length,2);
+   assert.equal(sentence,'它把勇气落在一次次小小的尝试里，让主动权的建立变得可感。');
+   assert.doesNotMatch(sentence,/千寻|神灵|陌生世界|回家/);
+  }
   const save=page.getByRole('button',{name:'保存电影海报',exact:true});
   assert.ok((await save.getAttribute('class')).includes('primary'));
   await save.focus();await page.keyboard.press('Enter');
@@ -65,21 +77,22 @@ try{
   const data=await image.getAttribute('src');assert.ok(data.startsWith('data:image/png;base64,'));
   const download=dialog.getByRole('link',{name:'下载 PNG',exact:false});
   assert.equal(await download.getAttribute('href'),data);
-  assert.equal(await download.getAttribute('download'),'cinema-inception.png');
+  assert.equal(await download.getAttribute('download'),`cinema-${f.id}.png`);
   const alt=await image.getAttribute('alt');
-  for(const text of [f.zh,f.title,String(f.year),f.region,f.style,f.summary,headlineReason(candidate),...candidate.reasons.map(r=>r.reason)])assert.ok(alt.includes(text),text);
+  for(const text of [f.zh,f.title,String(f.year),f.region,f.style,f.summary,recommendationSentence(candidate),matchSummary(candidate),...candidate.reasons.map(r=>r.reason)])assert.ok(alt.includes(text),text);
   const drawn=await page.evaluate(()=>window.posterDraws.filter(t=>t.width===1200&&t.height>=1500));
   const joined=drawn.map(t=>t.text).join('').replace(/\s/g,'');
-  for(const text of [f.zh,f.title,`${f.year} · ${f.region} · ${f.style}`,f.summary,headlineReason(candidate),'为什么推荐它','影片简介','匹配依据',...candidate.reasons.map(r=>`${r.choice}：${r.reason}`)])assert.ok(joined.includes(text.replace(/\s/g,'')),`PNG really draws: ${text}`);
+  for(const text of [f.zh,f.title,`${f.year} · ${f.region} · ${f.style}`,f.summary,recommendationSentence(candidate),matchSummary(candidate),'为什么推荐它','影片简介','匹配依据',...candidate.reasons.map(r=>`${matchHeading(r)}：${r.reason}`)])assert.ok(joined.includes(text.replace(/\s/g,'')),`PNG really draws: ${text}`);
   assert.equal(/https?:\/\/|保存电影海报|下载 PNG|复制片名|返回 Ember/.test(joined),false,'no UI/navigation/URL is painted into PNG');
+  if(candidate.reasons.length===1)assert.doesNotMatch(joined,/故事节奏→|故事结局→/,'single-match PNG does not add unmatched dimensions');
   assert.ok(drawn.every(t=>t.x>=28&&t.y>=28&&t.right<=1172&&t.y+40<t.height),'export text stays inside the poster');
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   for(let i=0;i<8;i++){await page.keyboard.press('Tab');assert.equal(await page.evaluate(()=>Boolean(document.activeElement.closest('dialog'))),true,'native modal traps keyboard focus');}
   const filePromise=page.waitForEvent('download');await download.click();const file=await filePromise;
-  const savedPath=path.join(root,`test-results/${width}-inception.png`);await file.saveAs(savedPath);
+  const savedPath=path.join(root,`test-results/${width}-${candidate.reasons.length}-matches-${f.id}.png`);await file.saveAs(savedPath);
   const bytes=await readFile(savedPath);assert.equal(bytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
   assert.equal(bytes.readUInt32BE(16),1200);assert.ok(bytes.readUInt32BE(20)>=1500);
-  await page.screenshot({path:path.join(root,`test-results/${width}-poster-preview.png`),fullPage:true});
+  await page.screenshot({path:path.join(root,`test-results/${width}-${candidate.reasons.length}-matches-${f.id}-poster-preview.png`),fullPage:true});
   await page.keyboard.press('Escape');
   await dialog.waitFor({state:'hidden'});
   assert.equal(await save.evaluate(el=>el===document.activeElement),true,'Escape restores focus to entry point');
@@ -88,9 +101,14 @@ try{
   await page.evaluate(()=>Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async text=>{window.copied=text;}}}));
   await page.getByRole('button',{name:'复制片名与理由',exact:true}).click();
   await page.locator('#copy-status').filter({hasText:'已复制'}).waitFor();
-  const expected=['今晚就看这部。',`${f.zh} / ${f.title} (${f.year})`,headlineReason(candidate),...questions.map((q,i)=>`${i+1}. ${q.choices[answers[i]].label}`),'Cinema Experiment · Ember Lab · https://cinema.mariustang.com/'].join('\n');
-  assert.equal(await page.evaluate(()=>window.copied),expected,'copy payload is byte-for-byte unchanged');
-  await page.screenshot({path:path.join(root,`test-results/${width}-poster-result.png`),fullPage:true});
+  const expected=['今晚就看这部。',`${f.zh} / ${f.title} (${f.year})`,recommendationSentence(candidate),...questions.map((q,i)=>`${i+1}. ${q.choices[answers[i]].label}`),'Cinema Experiment · Ember Lab · https://cinema.mariustang.com/'].join('\n');
+  const copied=await page.evaluate(()=>window.copied);
+  assert.equal(copied,expected,'only the recommendation sentence changes in the copy payload');
+  assert.deepEqual(copied.split('\n').filter((_,i)=>i!==2),[
+    '今晚就看这部。',`${f.zh} / ${f.title} (${f.year})`,...questions.map((q,i)=>`${i+1}. ${q.choices[answers[i]].label}`),'Cinema Experiment · Ember Lab · https://cinema.mariustang.com/'
+  ]);
+  assert.equal(copied.split('\n')[2],sentence);
+  await page.screenshot({path:path.join(root,`test-results/${width}-${candidate.reasons.length}-matches-${f.id}-poster-result.png`),fullPage:true});
   // A failed encoder remains recoverable and does not disturb the result page.
   await page.evaluate(()=>{window.originalToBlob=HTMLCanvasElement.prototype.toBlob;HTMLCanvasElement.prototype.toBlob=function(callback){callback(null);};});
   await save.click();await dialog.locator('.poster-status').filter({hasText:'海报暂时无法生成'}).waitFor();
@@ -101,7 +119,7 @@ try{
   await save.click();await page.waitForFunction(()=>typeof window.finishOldPoster==='function');
   await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});
   await page.getByRole('button',{name:'换一部',exact:true}).click();
-  const next=pool[inception+1];assert.ok(next);
+  const next=pool[filmIndex+1];assert.ok(next);
   await page.evaluate(()=>{HTMLCanvasElement.prototype.toBlob=window.originalToBlob;window.finishOldPoster();});
   assert.equal(await page.locator('h1').textContent(),next.film.zh);
   await page.getByRole('button',{name:'保存电影海报',exact:true}).click();
@@ -111,7 +129,7 @@ try{
   await dialog.getByRole('button',{name:'关闭海报预览',exact:true}).click();
   await context.close();
  }
- console.log('PASS poster UI/download: 320/375/1440px, smaller result type, primary entry, independent PNG with complete content while details are collapsed, no navigation/buttons/URLs, unchanged copy payload, focus/Escape, encoder failure and stale-generation protection; existing CSP unchanged, no external requests.');
+ console.log('PASS poster UI/download: 320/375/1440px, smaller result type, primary entry, independent PNG with complete content while details are collapsed, no navigation/buttons/URLs, shared recommendation sentence and original copy fields, single/multi-match evidence/counts, focus/Escape, encoder failure and stale-generation protection; existing CSP unchanged, no external requests.');
 
  // Every catalog film: choose its most complete actual match and check all rendered text fits.
  const catalog=new Map();
@@ -136,7 +154,7 @@ try{
   },candidate);
   assert.equal(result.width,1200);assert.ok(result.height>=1500);assert.ok(result.inside,candidate.film.id);
   assert.deepEqual(result.background,[17,19,16,255]);
-  for(const text of [candidate.film.zh,candidate.film.title,candidate.film.summary,...candidate.reasons.map(r=>r.reason)])assert.ok(result.text.includes(text.replace(/\s/g,'')),`${candidate.film.id}: complete text`);
+  for(const text of [candidate.film.zh,candidate.film.title,candidate.film.summary,recommendationSentence(candidate),matchSummary(candidate),...candidate.reasons.map(r=>`${matchHeading(r)}：${r.reason}`)])assert.ok(result.text.includes(text.replace(/\s/g,'')),`${candidate.film.id}: complete text`);
  }
  await page.close();assert.deepEqual(errors,[]);
  console.log('PASS poster catalog: all 35 films render valid 1200px-wide PNGs; all actual matching evidence, long titles and summaries remain complete and inside the image bounds.');

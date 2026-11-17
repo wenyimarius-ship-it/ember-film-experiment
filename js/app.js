@@ -2,7 +2,8 @@ import {mountCloudVault} from './cloud-vault.js';
 import {analyticsConfig} from './analytics-config.js';
 import {trackFunnel, trackFeedback, feedbackRating} from './analytics.js';
 import {questions} from './questions.js';
-import {candidates, headlineReason} from './engine.js';
+import {candidates} from './engine.js';
+import {recommendationSentence, matchHeading, matchSummary} from './recommendation-copy.js';
 import {createPosterDialog} from './poster.js';
 
 const main = document.querySelector('main');
@@ -80,12 +81,12 @@ function renderResults() {
         <h1 tabindex="-1">${escape(f.zh)}</h1><p class="original-title">${escape(f.title)}</p>
         <p class="film-meta">${f.year} · ${escape(f.region)} · ${escape(f.style)}</p>
       </div>
-      <div class="single-reason"><p class="reason-label">为什么推荐它</p><p class="headline-reason">${escape(headlineReason(candidate))}</p>
+      <div class="single-reason"><p class="reason-label">为什么推荐它</p><p class="headline-reason">${escape(recommendationSentence(candidate))}</p>
         <div class="result-feedback">
           <div class="feedback-row"><span>这部准不准？</span><div class="feedback-options" role="group" aria-label="这部准不准？">${[['accurate','准'],['partial','有点偏'],['off','不准']].map(([rating,label]) => `<button type="button" data-feedback="${rating}" aria-pressed="false">${label}</button>`).join('')}</div></div>
           <p id="feedback-status" class="feedback-status" role="status" aria-live="polite" tabindex="-1"></p>
         </div>
-        <details class="film-details"><summary>影片简介与匹配依据</summary><p>${escape(f.summary)}</p>${candidate.reasons.map(r => `<p><strong>${escape(r.choice)}</strong>：${escape(r.reason)}</p>`).join('')}<p class="muted">对应 ${candidate.reasons.length} / 3 个选择；仅解释实际匹配的偏好。部分影片包含暴力或沉重主题。</p></details>
+        <details class="film-details"><summary>影片简介与匹配依据</summary><p>${escape(f.summary)}</p>${candidate.reasons.map(r => `<p><strong>${escape(matchHeading(r))}</strong>：${escape(r.reason)}</p>`).join('')}<p class="muted">${matchSummary(candidate)}部分影片包含暴力或沉重主题。</p></details>
       </div>
       <div class="single-actions"><div class="confirmation-row"><p id="confirm-status" class="confirm-status" role="status">${confirmed ? '今晚就看这部。' : ''}</p>${confirmed ? '<span class="confirmed-badge">已选定 ✓</span>' : ''}</div>
         <div class="result-actions"><button class="primary save-poster" data-action="poster"><span aria-hidden="true">↓</span> 保存电影海报</button><button class="secondary" data-action="swap" ${exhausted ? 'disabled' : ''}>换一部 <span aria-hidden="true">↻</span></button></div>
@@ -113,7 +114,7 @@ function updateFeedback() {
 function copyText() {
   const candidate = result[resultIndex];
   const f = candidate.film;
-  return [`今晚就看这部。`, `${f.zh} / ${f.title} (${f.year})`, headlineReason(candidate), ...questions.map((q, i) => `${i + 1}. ${q.choices[answers[i]].label}`), 'Cinema Experiment · Ember Lab · https://cinema.mariustang.com/'].join('\n');
+  return [`今晚就看这部。`, `${f.zh} / ${f.title} (${f.year})`, recommendationSentence(candidate), ...questions.map((q, i) => `${i + 1}. ${q.choices[answers[i]].label}`), 'Cinema Experiment · Ember Lab · https://cinema.mariustang.com/'].join('\n');
 }
 
 async function copyResults(button) {

@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/engine.test.js tests/funnel.test.js tests/posthog-transport.test.js",
+    "test": "node --test tests/engine.test.js tests/funnel.test.js tests/posthog-transport.test.js tests/recommendation-copy.test.js",
     "test:browser": "node tests/browser.test.js",
     "test:funnel:browser": "node tests/funnel.browser.test.js"
   },
